@@ -1,87 +1,95 @@
 <div class="center-play">
   @if (ob) {
-  <div class="container">
-    <h3>{{ ob.descricao }}</h3>
+    <div class="container">
+      <h3>{{ ob.descricao }}</h3>
 
-    <div class="format">
-      <div class="option-format">
-        <div class="item-format">
-          <input-radio
-            [id]="'FORMATO_XLSX'"
-            [label]="'XLSX'"
-            [(ngModel)]="format"
-            [valueFix]="'XLSX'"
-          />
-        </div>
-        <div class="item-format">
-          <input-radio
-            [id]="'FORMATO_CSV'"
-            [label]="'CSV'"
-            [(ngModel)]="format"
-            [valueFix]="'CSV'"
-          />
-        </div>
-      </div>
-    </div>
-
-    <form [formGroup]="form" (submit)="play()">
-      @for(p of ob.parametros; track $index) {
-      <div class="container">
-        <div>
-          @if (p.tipoEntrada === 'PRIMITIVO') {
-
-          <div>
-            @if (p.tipoPrimitivo === 'INT') {
-            <input-text
-              [id]="'tabela_parametro_coluna_valor_' + p.chave"
-              [label]="p.descricao"
-              [formControlName]="p.chave"
+      <div class="format">
+        <div class="option-format">
+          <div class="item-format">
+            <input-radio
+              [id]="'FORMATO_XLSX'"
+              [label]="'XLSX'"
+              [(ngModel)]="format"
+              [valueFix]="'XLSX'"
             />
-            } @else if (p.tipoPrimitivo === 'STRING') {
-            <div>
-              <input-text
-                [id]="p.chave"
-                [label]="p.descricao"
-                [formControlName]="p.chave"
-              ></input-text>
-            </div>
-            } @else if (p.tipoPrimitivo === 'DATE') {
-            <input-date
-              [id]="p.chave"
-              [label]="p.descricao"
-              [formControlName]="p.chave"
-            />
-
-            } @else {}
           </div>
-          }@else if ( p.tipoEntrada === 'TABELA'|| p.tipoEntrada === 'DEFINIDOS'
-          ) { @if(p.multiplos){
-          <auto-complete-mult
-            [id]="p.chave"
-            [label]="p.descricao"
-            [placeholder]="'Selecione...'"
-            [labelView]="'descricao'"
-            [attributeValue]="'valor'"
-            [listData]="p.valores"
-            [formControlName]="p.chave"
-          />
-          }@else{
-          <auto-complete
-            [id]="p.chave"
-            [label]="p.descricao"
-            [placeholder]="'Selecione...'"
-            [labelView]="'descricao'"
-            [attributeValue]="'valor'"
-            [listData]="p.valores"
-            [formControlName]="p.chave"
-          />
-          } }
+          <div class="item-format">
+            <input-radio
+              [id]="'FORMATO_CSV'"
+              [label]="'CSV'"
+              [(ngModel)]="format"
+              [valueFix]="'CSV'"
+            />
+          </div>
+          <div class="item-format">
+            <input-radio
+              [id]="'FORMATO_PDF'"
+              [label]="'PDF'"
+              [(ngModel)]="format"
+              [valueFix]="'PDF'"
+            />
+          </div>
         </div>
       </div>
-      }
-      <button class="bt bt-save" type="submit">Executar</button>
-    </form>
-  </div>
 
+      <form [formGroup]="form" (submit)="play()">
+        @for (p of ob.parametros; track $index) {
+          <div class="container">
+            <div>
+              @if (p.tipoEntrada === "PRIMITIVO") {
+                <div>
+                  @if (p.tipoPrimitivo === "INT") {
+                    <input-text
+                      [id]="'tabela_parametro_coluna_valor_' + p.chave"
+                      [label]="p.descricao"
+                      [formControlName]="p.chave"
+                    />
+                  } @else if (p.tipoPrimitivo === "STRING") {
+                    <div>
+                      <input-text
+                        [id]="p.chave"
+                        [label]="p.descricao"
+                        [formControlName]="p.chave"
+                      ></input-text>
+                    </div>
+                  } @else if (p.tipoPrimitivo === "DATE") {
+                    <input-date
+                      [id]="p.chave"
+                      [label]="p.descricao"
+                      [formControlName]="p.chave"
+                    />
+                  } @else {}
+                </div>
+              } @else if (
+                p.tipoEntrada === "TABELA" || p.tipoEntrada === "DEFINIDOS"
+              ) {
+                @if (p.multiplos) {
+                  <auto-complete-mult
+                    [id]="p.chave"
+                    [label]="p.descricao"
+                    [placeholder]="'Selecione...'"
+                    [labelView]="'descricao'"
+                    [attributeValue]="'valor'"
+                    [listData]="p.valores"
+                    [formControlName]="p.chave"
+                  />
+                } @else {
+                  <auto-complete
+                    [id]="p.chave"
+                    [label]="p.descricao"
+                    [placeholder]="'Selecione...'"
+                    [labelView]="'descricao'"
+                    [attributeValue]="'valor'"
+                    [listData]="p.valores"
+                    [formControlName]="p.chave"
+                  />
+                }
+              }
+            </div>
+          </div>
+        }
+        <button class="bt bt-save" type="submit">Executar</button>
+      </form>
+    </div>
   }
 </div>

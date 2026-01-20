@@ -226,20 +226,13 @@ export class AutocompleteMultComponent
 
   override writeValue(value: any): void {
     this.popularSelected(value);
-    /*if (value) {
-      const itemSelecionado = this.listData.find(
-        (i) => i[this.attributeValue] === value
-      );
-      this.query = itemSelecionado ? itemSelecionado[this.labelView] : '';
-    }
-    this.itemSelecionado = value;*/
   }
 
   popularSelected(dataSeleted: Array<any>): void {
     this.dataSeleted = this.listData.filter((item) =>
       dataSeleted.includes(item[this.attributeValue])
     );
-    this.dataSeletedNumber = dataSeleted;
+    if (dataSeleted instanceof Array) this.dataSeletedNumber = dataSeleted;
     this.dataNoSeleted = this.listData.filter(
       (item) => !dataSeleted.includes(item[this.attributeValue])
     );
