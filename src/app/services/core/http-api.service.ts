@@ -19,7 +19,6 @@ export class HttpApiService {
   }
 
   getApi(complementoUrl: string): Observable<ResponseApi<any>> {
-    console.log(`${this.rote}/${complementoUrl}`);
     return this.httpSuper.get(`${this.rote}/${complementoUrl}`);
   }
 

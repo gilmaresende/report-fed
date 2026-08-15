@@ -31,6 +31,14 @@
           </div>
           <div class="item-format">
             <input-radio
+              [id]="'FORMATO_TXT'"
+              [label]="'TXT'"
+              [(ngModel)]="format"
+              [valueFix]="'TXT'"
+            />
+          </div>
+          <div class="item-format">
+            <input-radio
               [id]="'FORMATO_JRXML'"
               [label]="'JRXML'"
               [(ngModel)]="format"
